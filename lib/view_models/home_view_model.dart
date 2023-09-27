@@ -9,4 +9,10 @@ class HomeViewModel {
 
   /// title getter
   String get title => ref.read(titleProvider);
+  String get message => ref.read(messageProvider);
+  int get count => ref.watch(countProvider);
+
+  void countUp() {
+    ref.read(countProvider.notifier).update((state) => state + 1);
+  }
 }

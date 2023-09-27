@@ -2,8 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter_mvvm/view_models/home_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-final mogemoge = StateProvider((ref) => 'null');
-
 class HomeView extends ConsumerStatefulWidget {
   const HomeView(
     this.viewModel, {
@@ -30,7 +28,27 @@ class _HomeViewState extends ConsumerState<HomeView> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      appBar: AppBar(title: Text(_viewModel.title)),
+      appBar: AppBar(
+        backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+        title: Text(_viewModel.title),
+      ),
+      body: Center(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: <Widget>[
+            Text(_viewModel.message),
+            Text(
+              '${_viewModel.count}',
+              style: Theme.of(context).textTheme.headlineMedium,
+            ),
+          ],
+        ),
+      ),
+      floatingActionButton: FloatingActionButton(
+        onPressed: _viewModel.countUp,
+        tooltip: 'Increment',
+        child: const Icon(Icons.add),
+      ),
     );
   }
 }
