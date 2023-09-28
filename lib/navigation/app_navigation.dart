@@ -22,13 +22,10 @@ class _HomeViewState extends ConsumerState<AppNavigator> {
   Widget build(BuildContext context) {
     // 画面情報を全てここで登録するためにMaterialAppの呼び出しは原則一回
     return MaterialApp(
-      // 初期画面を設定
       initialRoute: '/home',
-      // router
       routes: {
-        '/home': (context) => HomeView(HomeViewModel()), // ホーム画面
+        '/home': (context) => HomeView(viewModel: HomeViewModel()), // ホーム画面
       },
-      // アプリ全体のテーマカラー
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
