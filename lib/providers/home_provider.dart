@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 /// タイトルプロバイダー(固定値)
-final titleProvider = Provider<String>((ref) => 'Flutter Demo Home Page');
+final titleProvider = Provider<String>((ref) => 'カウント画面');
 
 /// メッセージプロバイダー(固定値)
 final messageProvider =

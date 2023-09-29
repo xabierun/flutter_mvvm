@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:flutter_mvvm/view_models/postal_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
@@ -6,8 +7,6 @@ class PostalView extends ConsumerStatefulWidget {
   const PostalView({
     super.key,
   });
-
-  static PostalViewModel viewModel = PostalViewModel();
 
   @override
   ConsumerState<PostalView> createState() => _HomeViewState();
@@ -19,8 +18,7 @@ class _HomeViewState extends ConsumerState<PostalView> {
   @override
   void initState() {
     super.initState();
-    _viewModel = PostalView.viewModel;
-    _viewModel.ref = ref;
+    _viewModel = PostalViewModel(ref);
   }
 
   @override
@@ -39,17 +37,32 @@ class _HomeViewState extends ConsumerState<PostalView> {
               '${_viewModel.count}',
               style: Theme.of(context).textTheme.headlineMedium,
             ),
+            Form(
+              child: TextFormField(
+                inputFormatters: [FilteringTextInputFormatter.digitsOnly],
+                maxLength: 7,
+                validator: (value) {
+                  if (value == null || value.isEmpty) {
+                    return '空だよ';
+                  }
+                  return null;
+                },
+                decoration: const InputDecoration(
+                  border: OutlineInputBorder(),
+                  hintText: '1000000',
+                ),
+              ),
+            ),
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 20),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  _buildElevatedButton(Icons.add, _viewModel.countUp),
                   _buildElevatedButton(
                     Icons.restart_alt,
                     _viewModel.countReset,
                   ),
-                  _buildElevatedButton(Icons.remove, _viewModel.countDown),
+                  _buildElevatedButton(Icons.send, _viewModel.countDown),
                 ],
               ),
             ),
@@ -57,7 +70,9 @@ class _HomeViewState extends ConsumerState<PostalView> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: _viewModel.countUp,
+        onPressed: () {
+          Navigator.of(context).pushReplacementNamed('/home');
+        },
         tooltip: '画面遷移',
         child: const Icon(Icons.swap_horiz),
       ),

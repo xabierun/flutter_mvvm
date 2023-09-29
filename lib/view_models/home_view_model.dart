@@ -2,10 +2,9 @@ import 'package:flutter_mvvm/providers/home_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class HomeViewModel {
-  late final WidgetRef ref;
+  HomeViewModel(this.ref);
 
-  /// widgetRef setter
-  WidgetRef set(WidgetRef setRef) => ref = setRef;
+  late final WidgetRef ref;
 
   /// タイトル
   String get title => ref.read(titleProvider);

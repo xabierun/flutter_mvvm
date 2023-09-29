@@ -1,7 +1,9 @@
-import 'package:flutter_mvvm/providers/home_provider.dart';
+import 'package:flutter_mvvm/providers/postal_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PostalViewModel {
+  PostalViewModel(this.ref);
+
   late final WidgetRef ref;
 
   /// widgetRef setter

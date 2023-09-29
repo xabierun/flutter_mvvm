@@ -5,8 +5,6 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 class HomeView extends ConsumerStatefulWidget {
   const HomeView({super.key});
 
-  static HomeViewModel viewModel = HomeViewModel();
-
   @override
   ConsumerState<HomeView> createState() => _HomeViewState();
 }
@@ -17,8 +15,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
   @override
   void initState() {
     super.initState();
-    _viewModel = HomeView.viewModel;
-    _viewModel.ref = ref;
+    _viewModel = HomeViewModel(ref);
   }
 
   @override
@@ -56,7 +53,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
       ),
       floatingActionButton: FloatingActionButton(
         onPressed: () {
-          Navigator.of(context).pushNamed('/postal');
+          Navigator.of(context).pushReplacementNamed('/postal');
         },
         tooltip: '画面遷移',
         child: const Icon(Icons.swap_horiz),
