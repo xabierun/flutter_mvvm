@@ -1,23 +1,25 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm/view_models/home_view_model.dart';
+import 'package:flutter_mvvm/view_models/postal_view_model.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class HomeView extends ConsumerStatefulWidget {
-  const HomeView({super.key});
+class PostalView extends ConsumerStatefulWidget {
+  const PostalView({
+    super.key,
+  });
 
-  static HomeViewModel viewModel = HomeViewModel();
+  static PostalViewModel viewModel = PostalViewModel();
 
   @override
-  ConsumerState<HomeView> createState() => _HomeViewState();
+  ConsumerState<PostalView> createState() => _HomeViewState();
 }
 
-class _HomeViewState extends ConsumerState<HomeView> {
-  late HomeViewModel _viewModel;
+class _HomeViewState extends ConsumerState<PostalView> {
+  late PostalViewModel _viewModel;
 
   @override
   void initState() {
     super.initState();
-    _viewModel = HomeView.viewModel;
+    _viewModel = PostalView.viewModel;
     _viewModel.ref = ref;
   }
 
@@ -55,9 +57,7 @@ class _HomeViewState extends ConsumerState<HomeView> {
         ),
       ),
       floatingActionButton: FloatingActionButton(
-        onPressed: () {
-          Navigator.of(context).pushNamed('/postal');
-        },
+        onPressed: _viewModel.countUp,
         tooltip: '画面遷移',
         child: const Icon(Icons.swap_horiz),
       ),

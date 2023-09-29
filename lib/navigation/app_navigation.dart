@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_mvvm/view_models/home_view_model.dart';
 import 'package:flutter_mvvm/views/home_view.dart';
+import 'package:flutter_mvvm/views/postal_view.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AppNavigator extends ConsumerStatefulWidget {
@@ -24,7 +24,8 @@ class _HomeViewState extends ConsumerState<AppNavigator> {
     return MaterialApp(
       initialRoute: '/home',
       routes: {
-        '/home': (context) => HomeView(viewModel: HomeViewModel()), // ホーム画面
+        '/home': (context) => const HomeView(), // ホーム画面
+        '/postal': (context) => const PostalView(),
       },
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
