@@ -1,8 +1,11 @@
+import 'package:flutter/material.dart';
 import 'package:flutter_mvvm/providers/postal_provider.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class PostalViewModel {
   PostalViewModel(this.ref);
+  final TextEditingController _textController = TextEditingController();
+  final GlobalKey<FormState> _formKey = GlobalKey<FormState>();
 
   late final WidgetRef ref;
 
@@ -18,18 +21,23 @@ class PostalViewModel {
   /// カウント
   int get count => ref.watch(countProvider);
 
-  /// カウントアップ関数
-  void countUp() {
-    ref.read(countProvider.notifier).update((state) => state + 1);
+  TextEditingController get textController => _textController;
+  GlobalKey<FormState> get formKey => _formKey;
+
+  String? postalVaridator(String? value) {
+    if (value == null || value.isEmpty) {
+      return '入力してください';
+    }
+    if (value.length < 7) {
+      return '7文字入力してください';
+    }
+    return null;
   }
 
-  /// カウントダウン関数
-  void countDown() {
-    ref.read(countProvider.notifier).update((state) => state - 1);
-  }
-
-  /// カウントリセット関数
-  void countReset() {
-    ref.read(countProvider.notifier).update((state) => 0);
+  void submitForm() {
+    if (!_formKey.currentState!.validate()) {
+      return;
+      // 送信処理追加
+    }
   }
 }
